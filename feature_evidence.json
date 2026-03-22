@@ -1,0 +1,184 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-internet-identity-sign-in-and-a-basic-authenticated-user-session-so-each-order-is-associated-with-a-specific-user-principal",
+      "featureTitle": "Implement Internet Identity sign-in and a basic authenticated user session so each order is associated with a specific user principal.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useAuthz.ts",
+        "frontend/src/hooks/useCurrentUserProfile.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-storefront-ui-where-users-can-browse-products-search-by-name-filter-by-category-and-view-a-product-detail-page",
+      "featureTitle": "Create a storefront UI where users can browse products, search by name, filter by category, and view a product detail page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useProducts.ts",
+        "frontend/src/pages/ProductDetailPage.tsx",
+        "frontend/src/pages/StorefrontPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-client-side-cart-with-add-remove-update-quantity-cart-persistence-for-the-current-session-and-an-order-summary-subtotal-and-item-count",
+      "featureTitle": "Implement a client-side cart with add/remove/update quantity, cart persistence for the current session, and an order summary (subtotal and item count).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useCart.ts",
+        "frontend/src/pages/CartPage.tsx",
+        "frontend/src/pages/ProductDetailPage.tsx",
+        "frontend/src/pages/StorefrontPage.tsx",
+        "frontend/src/state/cart/CartProvider.tsx",
+        "frontend/src/state/cart/cartStorage.ts",
+        "frontend/src/state/cart/cartTypes.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-checkout-ui-that-collects-delivery-address-and-contact-phone-shows-the-order-summary-and-places-an-order-through-the-backend",
+      "featureTitle": "Create a checkout UI that collects delivery address and contact phone, shows the order summary, and places an order through the backend.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/CheckoutPage.tsx",
+        "frontend/src/pages/OrderConfirmationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-delivery-tracking-statuses-and-an-order-tracking-ui-statuses-must-include-at-minimum-placed-preparing-out-for-delivery-delivered-cancelled-include-a-simple-status-timeline-on-the-order-detail-view",
+      "featureTitle": "Implement delivery tracking statuses and an order tracking UI. Statuses must include at minimum: Placed, Preparing, Out for delivery, Delivered, Cancelled. Include a simple status timeline on the order detail view.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/orders/OrderStatusTimeline.tsx",
+        "frontend/src/hooks/useOrders.ts",
+        "frontend/src/pages/MyOrdersPage.tsx",
+        "frontend/src/pages/OrderDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-core-navigation-and-pages-storefront-cart-checkout-my-orders-order-detail-ensure-routing-and-empty-states-are-user-friendly-and-in-english",
+      "featureTitle": "Add core navigation and pages: Storefront, Cart, Checkout, My Orders, Order Detail. Ensure routing and empty states are user-friendly and in English.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/common/AccessDeniedScreen.tsx",
+        "frontend/src/components/common/NotFoundScreen.tsx",
+        "frontend/src/components/layout/AppHeader.tsx",
+        "frontend/src/components/layout/AppLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-cohesive-visual-theme-across-the-app-colors-typography-spacing-component-styles-suitable-for-a-modern-grocery-retail-delivery-experience-and-keep-it-consistent-across-all-pages",
+      "featureTitle": "Apply a cohesive visual theme across the app (colors, typography, spacing, component styles) suitable for a modern grocery/retail delivery experience, and keep it consistent across all pages.",
+      "files": [
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-render-the-generated-images-logo-and-hero-illustration-as-static-assets-from-frontend-public-assets-generated-and-use-them-in-the-ui",
+      "featureTitle": "Render the generated images (logo and hero illustration) as static assets from frontend/public/assets/generated and use them in the UI.",
+      "files": [
+        "frontend/src/components/layout/AppHeader.tsx",
+        "frontend/src/pages/StorefrontPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

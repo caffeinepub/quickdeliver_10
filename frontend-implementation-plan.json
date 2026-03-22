@@ -1,0 +1,290 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Online shopping & delivery app (frontend: storefront, cart, checkout, orders, tracking)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add Internet Identity sign-in/out, authenticated session state, and require auth for order creation flows.",
+      "acceptanceCriteria": [
+        "A user can sign in and sign out using Internet Identity.",
+        "The UI clearly shows whether the user is signed in (e.g., header state).",
+        "All order-creation actions require the user to be signed in (with a clear prompt if not)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell with routing, global layout, and authentication-aware guards for checkout/order placement. Use the selected authorization component’s frontend authentication guidance (Internet Identity + session) to drive signed-in state. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a header login/logout button using useInternetIdentity, and clear cached app data on logout (including react-query cache and cart/session data) per the selected authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create a first-login profile setup modal that prompts for a display name if getCallerUserProfile() returns null, and saves it via saveCallerUserProfile(). Avoid displaying the principal id; show profile name instead (selected authorization component guidance). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUserProfile.ts",
+          "operation": "create",
+          "description": "Add a react-query hook that fetches getCallerUserProfile() and exposes loading state that prevents the profile setup modal flash (per selected authorization component guidance). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAuthz.ts",
+          "operation": "create",
+          "description": "Add a small auth helper hook that derives isAuthenticated from useInternetIdentity identity, fetches caller role when needed (getCallerUserRole/isCallerAdmin), and provides a consistent English message for unauthorized actions. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build storefront browsing with product list, search, category filter, and a product detail view.",
+      "acceptanceCriteria": [
+        "Storefront lists products with name, price, and availability.",
+        "Search filters products by name (case-insensitive).",
+        "Category filter narrows visible products.",
+        "Clicking a product opens a detail view with description and price."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useProducts.ts",
+          "operation": "create",
+          "description": "Create react-query hooks to load products from the backend capability (getAllProducts, and optionally local client-side lookup by id for detail view) and normalize loading/error states in English."
+        },
+        {
+          "path": "frontend/src/pages/StorefrontPage.tsx",
+          "operation": "create",
+          "description": "Implement the storefront page with search-by-name (case-insensitive), category filter, product cards showing name/price/availability, and links to product detail. Use composed shadcn-ui components (do not edit frontend/src/components/ui) for cards, inputs, and selects. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetailPage.tsx",
+          "operation": "create",
+          "description": "Implement product detail page showing description, price, availability, and an Add to Cart action. Ensure friendly empty/error states in English when product is missing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Storefront and Product Detail routes into the router and ensure navigation paths are reachable via header/nav."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement a client-side cart with add/remove/update quantity, session persistence, and order summary.",
+      "acceptanceCriteria": [
+        "User can add items to cart from product list or product detail.",
+        "User can change quantities and remove items from cart.",
+        "Cart shows subtotal and total item count.",
+        "Cart state persists across page navigation within the app session."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/state/cart/cartTypes.ts",
+          "operation": "create",
+          "description": "Define cart item types that capture product id, name, unit price, and quantity, aligned with the backend’s LineItem snapshot expectations."
+        },
+        {
+          "path": "frontend/src/state/cart/cartStorage.ts",
+          "operation": "create",
+          "description": "Implement session persistence for cart state using sessionStorage (serialize/deserialize, versioning, and safe error handling)."
+        },
+        {
+          "path": "frontend/src/state/cart/CartProvider.tsx",
+          "operation": "create",
+          "description": "Create a Cart context/provider with add/remove/update quantity, computed subtotal and item count, and persistence via cartStorage."
+        },
+        {
+          "path": "frontend/src/hooks/useCart.ts",
+          "operation": "create",
+          "description": "Create a hook to access cart actions/selectors from components (items, subtotal, itemCount, clearCart)."
+        },
+        {
+          "path": "frontend/src/pages/CartPage.tsx",
+          "operation": "create",
+          "description": "Implement Cart page UI with editable quantities, remove controls, subtotal and item count, and a clear English empty state with a call-to-action back to storefront. Use composed shadcn-ui components for forms/buttons. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/StorefrontPage.tsx",
+          "operation": "modify",
+          "description": "Wire Add to Cart actions from the product list into CartProvider."
+        },
+        {
+          "path": "frontend/src/pages/ProductDetailPage.tsx",
+          "operation": "modify",
+          "description": "Wire Add to Cart action from product detail into CartProvider."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the routed application with CartProvider and add the Cart route to the router."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Create a checkout UI to collect delivery address/phone, validate inputs, show summary, place an order, and handle success/error behavior.",
+      "acceptanceCriteria": [
+        "Checkout requires non-empty delivery address and contact phone validation with inline error messages.",
+        "Submitting checkout creates an order and shows a confirmation screen with the orderId.",
+        "After successful order placement, the cart is cleared.",
+        "If the backend returns an error, the UI displays an English error message and keeps the cart intact."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useCreateOrder.ts",
+          "operation": "create",
+          "description": "Create a mutation hook that calls the backend capability createOrder(input) using current cart snapshot data, and surfaces friendly English errors for failures (including authorization traps)."
+        },
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "create",
+          "description": "Implement checkout form collecting delivery address and contact phone, inline validation, and order summary using cart state. Require sign-in before submission (prompt and link/button to sign in). Use composed shadcn-ui form components; do not edit frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/OrderConfirmationPage.tsx",
+          "operation": "create",
+          "description": "Implement confirmation screen that displays the returned orderId and provides navigation to My Orders / Order Detail."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire Checkout and Order Confirmation routes and add a guard so checkout/order placement is only available when authenticated; ensure cart clearing occurs only on successful order placement."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Implement order tracking UI with status list and order detail timeline/stepper for defined delivery statuses.",
+      "acceptanceCriteria": [
+        "Each order has one of the defined statuses stored on the backend.",
+        "Frontend shows a list of the user’s orders with current status and created date/time.",
+        "Order detail view shows a timeline/stepper highlighting the current status.",
+        "At least one backend method exists to retrieve a single order by id for the authenticated caller."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useOrders.ts",
+          "operation": "create",
+          "description": "Create hooks to fetch a user’s orders list (authenticated) and to fetch a single order by id (getOrder). Normalize date/time formatting and errors in English."
+        },
+        {
+          "path": "frontend/src/components/orders/OrderStatusTimeline.tsx",
+          "operation": "create",
+          "description": "Create a simple timeline/stepper component that maps backend OrderStatus values to user-friendly English labels (Placed, Preparing, Out for delivery, Delivered, Cancelled) and highlights the current status. Use composed shadcn-ui primitives (do not edit frontend/src/components/ui). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/MyOrdersPage.tsx",
+          "operation": "create",
+          "description": "Implement My Orders page showing list of orders with created date/time and current status; include friendly English empty state when none exist."
+        },
+        {
+          "path": "frontend/src/pages/OrderDetailPage.tsx",
+          "operation": "create",
+          "description": "Implement Order Detail page that loads an order by id, renders delivery/contact info, line items, and the status timeline; handle not-found/unauthorized errors gracefully in English."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire My Orders and Order Detail routes into the router and ensure they require authentication to view personal data (show Access Denied / sign-in prompt when unauthenticated)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add core navigation and required pages with English-friendly empty/error states and graceful handling for not-found/unauthorized.",
+      "acceptanceCriteria": [
+        "All pages are reachable from a consistent header/navigation.",
+        "Cart empty state has a clear call to action to return to the storefront.",
+        "My Orders empty state explains that no orders exist yet.",
+        "Order not found and unauthorized states are handled gracefully."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/AppHeader.tsx",
+          "operation": "create",
+          "description": "Create a consistent header with navigation links to Storefront, Cart, Checkout, and My Orders; include auth state (signed in name vs signed out) and the logo (wired in REQ-11). Compose shadcn-ui components; do not edit frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a shared layout wrapper applying consistent spacing and placing AppHeader above routed content."
+        },
+        {
+          "path": "frontend/src/components/common/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create a simple screen to show when a user is not signed in (or otherwise unauthorized), with a clear English message and a sign-in call-to-action. Align behavior with the selected authorization component guidance for access control UX. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/common/NotFoundScreen.tsx",
+          "operation": "create",
+          "description": "Create a user-friendly Not Found screen in English with navigation back to Storefront."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure all required routes exist (Storefront, Cart, Checkout, My Orders, Order Detail), all are reachable via header navigation, and add route-level fallbacks for not-found and unauthorized states."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Apply a cohesive modern grocery/retail delivery visual theme across the app.",
+      "acceptanceCriteria": [
+        "The app uses a consistent theme across header, buttons, cards, and forms.",
+        "Pages share consistent layout structure and spacing rules.",
+        "User-facing text is in English and consistent in tone and terminology."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define/adjust global theme tokens (colors, typography, spacing) and ensure consistent base styles for a modern delivery/grocery feel, staying compatible with Tailwind/shadcn-ui usage and without editing immutable UI component files."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme configuration (palette/typography/radius/shadows) to match the cohesive warm, modern retail delivery theme used across pages."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Ensure shared layout spacing and content width rules are applied consistently across all pages."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Wire generated logo and hero illustration from frontend/public/assets/generated into the header and storefront.",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the frontend via static paths.",
+        "The logo is displayed in the app header.",
+        "A hero illustration is displayed on the storefront/home section without requiring any backend calls."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/shop-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated logo asset at the exact path frontend/public/assets/generated/shop-logo.dim_512x512.png for static serving."
+        },
+        {
+          "path": "frontend/public/assets/generated/store-hero.dim_1600x600.png",
+          "operation": "create",
+          "description": "Add the generated hero illustration asset at the exact path frontend/public/assets/generated/store-hero.dim_1600x600.png for static serving."
+        },
+        {
+          "path": "frontend/src/components/layout/AppHeader.tsx",
+          "operation": "modify",
+          "description": "Render the static logo image from frontend/public/assets/generated/shop-logo.dim_512x512.png in the header."
+        },
+        {
+          "path": "frontend/src/pages/StorefrontPage.tsx",
+          "operation": "modify",
+          "description": "Render the static hero illustration from frontend/public/assets/generated/store-hero.dim_1600x600.png in a hero section on the storefront page without any backend calls."
+        }
+      ]
+    }
+  ]
+}

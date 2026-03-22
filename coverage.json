@@ -1,0 +1,310 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T08:28:22.689Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 11,
+    "implemented": 8,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Implement Internet Identity sign-in and a basic authenticated user session so each order is associated with a specific user principal.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/auth/LoginButton.tsx",
+          "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "frontend/src/hooks/useCurrentUserProfile.ts",
+          "frontend/src/hooks/useAuthz.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/auth/LoginButton.tsx",
+          "frontend/src/components/auth/ProfileSetupModal.tsx",
+          "frontend/src/hooks/useCurrentUserProfile.ts",
+          "frontend/src/hooks/useAuthz.ts"
+        ]
+      },
+      {
+        "id": "REQ-10",
+        "summary": "Apply a cohesive visual theme across the app (colors, typography, spacing, component styles) suitable for a modern grocery/retail delivery experience, and keep it consistent across all pages.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/AppLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/AppLayout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-11",
+        "summary": "Render the generated images (logo and hero illustration) as static assets from frontend/public/assets/generated and use them in the UI.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/shop-logo.dim_512x512.png",
+          "frontend/public/assets/generated/store-hero.dim_1600x600.png",
+          "frontend/src/components/layout/AppHeader.tsx",
+          "frontend/src/pages/StorefrontPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/shop-logo.dim_512x512.png",
+          "frontend/public/assets/generated/store-hero.dim_1600x600.png",
+          "frontend/src/components/layout/AppHeader.tsx",
+          "frontend/src/pages/StorefrontPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Create backend product catalog support with a small default set of products, including: id, name, description, price, category, image URL (optional), and availability (in stock/out of stock).",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Create a storefront UI where users can browse products, search by name, filter by category, and view a product detail page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useProducts.ts",
+          "frontend/src/pages/StorefrontPage.tsx",
+          "frontend/src/pages/ProductDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useProducts.ts",
+          "frontend/src/pages/StorefrontPage.tsx",
+          "frontend/src/pages/ProductDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Implement a client-side cart with add/remove/update quantity, cart persistence for the current session, and an order summary (subtotal and item count).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/state/cart/cartTypes.ts",
+          "frontend/src/state/cart/cartStorage.ts",
+          "frontend/src/state/cart/CartProvider.tsx",
+          "frontend/src/hooks/useCart.ts",
+          "frontend/src/pages/CartPage.tsx",
+          "frontend/src/pages/StorefrontPage.tsx",
+          "frontend/src/pages/ProductDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/state/cart/cartTypes.ts",
+          "frontend/src/state/cart/cartStorage.ts",
+          "frontend/src/state/cart/CartProvider.tsx",
+          "frontend/src/hooks/useCart.ts",
+          "frontend/src/pages/CartPage.tsx",
+          "frontend/src/pages/StorefrontPage.tsx",
+          "frontend/src/pages/ProductDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Implement backend order creation and storage. An order must include: orderId, user principal, line items (productId, name snapshot, unit price snapshot, quantity), delivery address, contact phone, createdAt timestamp, and status.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Create a checkout UI that collects delivery address and contact phone, shows the order summary, and places an order through the backend.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useCreateOrder.ts",
+          "frontend/src/pages/CheckoutPage.tsx",
+          "frontend/src/pages/OrderConfirmationPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/CheckoutPage.tsx",
+          "frontend/src/pages/OrderConfirmationPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Implement delivery tracking statuses and an order tracking UI. Statuses must include at minimum: Placed, Preparing, Out for delivery, Delivered, Cancelled. Include a simple status timeline on the order detail view.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useOrders.ts",
+          "frontend/src/components/orders/OrderStatusTimeline.tsx",
+          "frontend/src/pages/MyOrdersPage.tsx",
+          "frontend/src/pages/OrderDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useOrders.ts",
+          "frontend/src/components/orders/OrderStatusTimeline.tsx",
+          "frontend/src/pages/MyOrdersPage.tsx",
+          "frontend/src/pages/OrderDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add a minimal admin-only capability (restricted to a configured list of principals in code) to update an order’s status to support simulated delivery progress.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add core navigation and pages: Storefront, Cart, Checkout, My Orders, Order Detail. Ensure routing and empty states are user-friendly and in English.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/layout/AppHeader.tsx",
+          "frontend/src/components/layout/AppLayout.tsx",
+          "frontend/src/components/common/AccessDeniedScreen.tsx",
+          "frontend/src/components/common/NotFoundScreen.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/layout/AppHeader.tsx",
+          "frontend/src/components/layout/AppLayout.tsx",
+          "frontend/src/components/common/AccessDeniedScreen.tsx",
+          "frontend/src/components/common/NotFoundScreen.tsx",
+          "frontend/src/App.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/package.json",
+    "build-template/pnpm-lock.yaml",
+    "build-template/pnpm-workspace.yaml",
+    "build-template/scripts/prune-unused-images.js",
+    "build-template/scripts/resize-images.js",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/backend/system-idl/aaaaa-aa.did",
+    "build-template/src/frontend/canister.yaml",
+    "build-template/src/frontend/components.json",
+    "build-template/src/frontend/env.json",
+    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
+    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
+    "build-template/src/frontend/eslint.config.js",
+    "build-template/src/frontend/package.json",
+    "build-template/src/frontend/postcss.config.js",
+    "build-template/src/frontend/src/components/ui/accordion.tsx",
+    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
+    "build-template/src/frontend/src/components/ui/alert.tsx",
+    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
+    "build-template/src/frontend/src/components/ui/avatar.tsx",
+    "build-template/src/frontend/src/components/ui/badge.tsx",
+    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
+    "build-template/src/frontend/src/components/ui/button.tsx",
+    "build-template/src/frontend/src/components/ui/calendar.tsx",
+    "build-template/src/frontend/src/components/ui/card.tsx",
+    "build-template/src/frontend/src/components/ui/carousel.tsx",
+    "build-template/src/frontend/src/components/ui/chart.tsx",
+    "build-template/src/frontend/src/components/ui/checkbox.tsx",
+    "build-template/src/frontend/src/components/ui/collapsible.tsx",
+    "build-template/src/frontend/src/components/ui/command.tsx",
+    "build-template/src/frontend/src/components/ui/context-menu.tsx",
+    "build-template/src/frontend/src/components/ui/dialog.tsx",
+    "build-template/src/frontend/src/components/ui/drawer.tsx",
+    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
+    "build-template/src/frontend/src/components/ui/form.tsx",
+    "build-template/src/frontend/src/components/ui/hover-card.tsx",
+    "build-template/src/frontend/src/components/ui/input-otp.tsx",
+    "build-template/src/frontend/src/components/ui/input.tsx",
+    "build-template/src/frontend/src/components/ui/label.tsx",
+    "build-template/src/frontend/src/components/ui/menubar.tsx",
+    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
+    "build-template/src/frontend/src/components/ui/pagination.tsx",
+    "build-template/src/frontend/src/components/ui/popover.tsx",
+    "build-template/src/frontend/src/components/ui/progress.tsx",
+    "build-template/src/frontend/src/components/ui/radio-group.tsx",
+    "build-template/src/frontend/src/components/ui/resizable.tsx",
+    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
+    "build-template/src/frontend/src/components/ui/select.tsx",
+    "build-template/src/frontend/src/components/ui/separator.tsx",
+    "build-template/src/frontend/src/components/ui/sheet.tsx",
+    "build-template/src/frontend/src/components/ui/sidebar.tsx",
+    "build-template/src/frontend/src/components/ui/skeleton.tsx",
+    "build-template/src/frontend/src/components/ui/slider.tsx",
+    "build-template/src/frontend/src/components/ui/sonner.tsx",
+    "build-template/src/frontend/src/components/ui/switch.tsx",
+    "build-template/src/frontend/src/components/ui/table.tsx",
+    "build-template/src/frontend/src/components/ui/tabs.tsx",
+    "build-template/src/frontend/src/components/ui/textarea.tsx",
+    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
+    "build-template/src/frontend/src/components/ui/toggle.tsx",
+    "build-template/src/frontend/src/components/ui/tooltip.tsx",
+    "build-template/src/frontend/src/hooks/use-mobile.tsx",
+    "build-template/src/frontend/src/lib/utils.ts",
+    "build-template/src/frontend/tsconfig.json",
+    "build-template/src/frontend/vite.config.js",
+    "build-template/tsconfig.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/assets/generated/shop-logo.dim_512x512.png",
+    "frontend/public/assets/generated/store-hero.dim_1600x600.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/common/AccessDeniedScreen.tsx",
+    "frontend/src/components/common/NotFoundScreen.tsx",
+    "frontend/src/components/layout/AppHeader.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/components/orders/OrderStatusTimeline.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAuthz.ts",
+    "frontend/src/hooks/useCart.ts",
+    "frontend/src/hooks/useCurrentUserProfile.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useOrders.ts",
+    "frontend/src/hooks/useProducts.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CartPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
+    "frontend/src/pages/MyOrdersPage.tsx",
+    "frontend/src/pages/OrderConfirmationPage.tsx",
+    "frontend/src/pages/OrderDetailPage.tsx",
+    "frontend/src/pages/ProductDetailPage.tsx",
+    "frontend/src/pages/StorefrontPage.tsx",
+    "frontend/src/state/cart/CartProvider.tsx",
+    "frontend/src/state/cart/cartStorage.ts",
+    "frontend/src/state/cart/cartTypes.ts",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/StorageClient.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

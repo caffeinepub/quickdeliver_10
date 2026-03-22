@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build an online shopping and delivery app with a storefront for browsing items, placing orders, and tracking deliveries.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal modern delivery app logo, flat vector style, warm palette (shop-logo.dim_512x512.png)\n- Storefront hero illustration showing shopping bag and delivery scooter, clean flat illustration, warm palette (store-hero.dim_1600x600.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-sign-in-and-a-basic-authenticated-user-session-so-each-order-is-associated-with-a-specific-user-principal",
+      "title": "Implement Internet Identity sign-in and a basic authenticated user session so each order is associated with a specific user principal.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-storefront-ui-where-users-can-browse-products-search-by-name-filter-by-category-and-view-a-product-detail-page",
+      "title": "Create a storefront UI where users can browse products, search by name, filter by category, and view a product detail page.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-client-side-cart-with-add-remove-update-quantity-cart-persistence-for-the-current-session-and-an-order-summary-subtotal-and-item-count",
+      "title": "Implement a client-side cart with add/remove/update quantity, cart persistence for the current session, and an order summary (subtotal and item count).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-checkout-ui-that-collects-delivery-address-and-contact-phone-shows-the-order-summary-and-places-an-order-through-the-backend",
+      "title": "Create a checkout UI that collects delivery address and contact phone, shows the order summary, and places an order through the backend.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-delivery-tracking-statuses-and-an-order-tracking-ui-statuses-must-include-at-minimum-placed-preparing-out-for-delivery-delivered-cancelled-include-a-simple-status-timeline-on-the-order-detail-view",
+      "title": "Implement delivery tracking statuses and an order tracking UI. Statuses must include at minimum: Placed, Preparing, Out for delivery, Delivered, Cancelled. Include a simple status timeline on the order detail view.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-core-navigation-and-pages-storefront-cart-checkout-my-orders-order-detail-ensure-routing-and-empty-states-are-user-friendly-and-in-english",
+      "title": "Add core navigation and pages: Storefront, Cart, Checkout, My Orders, Order Detail. Ensure routing and empty states are user-friendly and in English.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-visual-theme-across-the-app-colors-typography-spacing-component-styles-suitable-for-a-modern-grocery-retail-delivery-experience-and-keep-it-consistent-across-all-pages",
+      "title": "Apply a cohesive visual theme across the app (colors, typography, spacing, component styles) suitable for a modern grocery/retail delivery experience, and keep it consistent across all pages.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-the-generated-images-logo-and-hero-illustration-as-static-assets-from-frontend-public-assets-generated-and-use-them-in-the-ui",
+      "title": "Render the generated images (logo and hero illustration) as static assets from frontend/public/assets/generated and use them in the UI.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create an online shopping and delivery app (browse items, place orders, track deliveries)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Create backend product catalog support with a small default set of products, including: id, name, description, price, category, image URL (optional), and availability (in stock/out of stock).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Implement backend order creation and storage. An order must include: orderId, user principal, line items (productId, name snapshot, unit price snapshot, quantity), delivery address, contact phone, createdAt timestamp, and status.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Add a minimal admin-only capability (restricted to a configured list of principals in code) to update an order’s status to support simulated delivery progress.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Online shopping & delivery app (storefront, orders, delivery tracking)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

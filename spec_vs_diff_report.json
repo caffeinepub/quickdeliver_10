@@ -1,0 +1,100 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T08:28:22.686Z",
+  "summary": "Core app scaffolding is present (routing, header with logo, Internet Identity hook/provider, product/order hooks, order status timeline). However, several explicit requirements are either incomplete or contradicted by the diff evidence (notably product catalog defaults and listing caller orders), and a few unrequested features were added (user profiles, social footer, admin token URL parameter initialization).",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Backend product catalog must have at least 8 sample products available by default after deployment, and expose query methods to list all products and fetch a product by id.",
+      "reason": "The backend code shown only adds 3 products, and they are only inserted via an admin-only initProducts() call (so they are not available by default after deployment unless an admin manually runs initialization). A get-by-id query method is not shown in the diff summary.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Backend must expose a query method to list orders for the authenticated caller.",
+      "reason": "The frontend query hook for listing caller orders is stubbed to always return an empty array instead of calling the backend, indicating the required capability is not actually wired/implemented from the frontend side at minimum.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Frontend shows a list of the user’s orders with current status and created date/time.",
+      "reason": "Because the caller-orders query hook always returns an empty list, the UI cannot display the user’s orders (status + createdAt) from real backend data.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile management and a mandatory profile setup modal (name capture) with backend userProfiles storage and related queries/mutations.",
+      "reason": "The BuildRequest does not ask for user profiles or a profile-creation flow; it only requires Internet Identity session and order association with principal.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useCurrentUserProfile.ts",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/components/layout/AppHeader.tsx"
+      ]
+    },
+    {
+      "description": "Social media footer links/icons and “Built with caffeine.ai” footer content.",
+      "reason": "Not requested in any requirement; BuildRequest focuses on storefront/cart/checkout/orders/tracking and cohesive theme.",
+      "evidence": [
+        "frontend/src/components/layout/AppLayout.tsx"
+      ]
+    },
+    {
+      "description": "Admin-token initialization via a secret URL parameter (caffeineAdminToken) and calling _initializeAccessControlWithSecret on the actor.",
+      "reason": "REQ-8 requires admin-only status update restricted to configured principals in code; the diff introduces an additional secret-token mechanism not requested.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupModal.tsx",
+    "frontend/src/components/common/AccessDeniedScreen.tsx",
+    "frontend/src/components/common/NotFoundScreen.tsx",
+    "frontend/src/components/layout/AppHeader.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/components/orders/OrderStatusTimeline.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAuthz.ts",
+    "frontend/src/hooks/useCart.ts",
+    "frontend/src/hooks/useCurrentUserProfile.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useOrders.ts",
+    "frontend/src/hooks/useProducts.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CartPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
+    "frontend/src/pages/MyOrdersPage.tsx",
+    "frontend/src/pages/OrderConfirmationPage.tsx",
+    "frontend/src/pages/OrderDetailPage.tsx",
+    "frontend/src/pages/ProductDetailPage.tsx",
+    "frontend/src/pages/StorefrontPage.tsx",
+    "frontend/src/state/cart/CartProvider.tsx",
+    "frontend/src/state/cart/cartStorage.ts",
+    "frontend/src/state/cart/cartTypes.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

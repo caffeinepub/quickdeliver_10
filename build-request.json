@@ -1,0 +1,230 @@
+{
+  "kind": "build_request",
+  "title": "Online shopping & delivery app (storefront, orders, delivery tracking)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement Internet Identity sign-in and a basic authenticated user session so each order is associated with a specific user principal.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A user can sign in and sign out using Internet Identity.",
+        "The UI clearly shows whether the user is signed in (e.g., header state).",
+        "All order-creation actions require the user to be signed in (with a clear prompt if not)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create backend product catalog support with a small default set of products, including: id, name, description, price, category, image URL (optional), and availability (in stock/out of stock).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes a query method to list all products.",
+        "Backend exposes a query method to fetch a product by id.",
+        "At least 8 sample products are available by default after deployment.",
+        "Products include price and availability fields that the frontend can display."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a storefront UI where users can browse products, search by name, filter by category, and view a product detail page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Storefront lists products with name, price, and availability.",
+        "Search filters products by name (case-insensitive).",
+        "Category filter narrows visible products.",
+        "Clicking a product opens a detail view with description and price."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement a client-side cart with add/remove/update quantity, cart persistence for the current session, and an order summary (subtotal and item count).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can add items to cart from product list or product detail.",
+        "User can change quantities and remove items from cart.",
+        "Cart shows subtotal and total item count.",
+        "Cart state persists across page navigation within the app session."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement backend order creation and storage. An order must include: orderId, user principal, line items (productId, name snapshot, unit price snapshot, quantity), delivery address, contact phone, createdAt timestamp, and status.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes an update method to create an order for the authenticated caller.",
+        "Order stores snapshots of product name and price at time of purchase.",
+        "Backend exposes a query method to list orders for the authenticated caller.",
+        "Orders persist across canister upgrades within the same deployment (stable storage)."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create a checkout UI that collects delivery address and contact phone, shows the order summary, and places an order through the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Checkout requires non-empty delivery address and contact phone validation with inline error messages.",
+        "Submitting checkout creates an order and shows a confirmation screen with the orderId.",
+        "After successful order placement, the cart is cleared.",
+        "If the backend returns an error, the UI displays an English error message and keeps the cart intact."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement delivery tracking statuses and an order tracking UI. Statuses must include at minimum: Placed, Preparing, Out for delivery, Delivered, Cancelled. Include a simple status timeline on the order detail view.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each order has one of the defined statuses stored on the backend.",
+        "Frontend shows a list of the user’s orders with current status and created date/time.",
+        "Order detail view shows a timeline/stepper highlighting the current status.",
+        "At least one backend method exists to retrieve a single order by id for the authenticated caller."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add a minimal admin-only capability (restricted to a configured list of principals in code) to update an order’s status to support simulated delivery progress.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Only configured admin principals can update order status; non-admin calls are rejected.",
+        "Admin can set order status to any of the supported statuses.",
+        "Status updates are reflected when the user reloads their order detail view."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add core navigation and pages: Storefront, Cart, Checkout, My Orders, Order Detail. Ensure routing and empty states are user-friendly and in English.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages are reachable from a consistent header/navigation.",
+        "Cart empty state has a clear call to action to return to the storefront.",
+        "My Orders empty state explains that no orders exist yet.",
+        "Order not found and unauthorized states are handled gracefully."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Apply a cohesive visual theme across the app (colors, typography, spacing, component styles) suitable for a modern grocery/retail delivery experience, and keep it consistent across all pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app uses a consistent theme across header, buttons, cards, and forms.",
+        "Pages share consistent layout structure and spacing rules.",
+        "User-facing text is in English and consistent in tone and terminology."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Render the generated images (logo and hero illustration) as static assets from frontend/public/assets/generated and use them in the UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Create a online shoping\n delivery app"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced by the frontend via static paths.",
+        "The logo is displayed in the app header.",
+        "A hero illustration is displayed on the storefront/home section without requiring any backend calls."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in backend/main.mo; create backend/migration.mo only if upgrading existing state requires it).",
+    "Do not edit files under frontend/src/components/ui or any paths designated immutable by the template (compose them instead).",
+    "Use English for all user-facing UI text."
+  ],
+  "nonGoals": [
+    "Integrating real payment providers (Stripe/PayPal) or storing credit card data.",
+    "Real-time tracking (no WebSockets/push notifications).",
+    "Third-party authentication providers other than Internet Identity.",
+    "External databases or external hosting providers."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal modern delivery app logo, flat vector style, warm palette (shop-logo.dim_512x512.png)",
+      "Storefront hero illustration showing shopping bag and delivery scooter, clean flat illustration, warm palette (store-hero.dim_1600x600.png)"
+    ],
+    "edits": []
+  }
+}
